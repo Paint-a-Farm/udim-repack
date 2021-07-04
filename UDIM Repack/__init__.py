@@ -40,9 +40,10 @@ class UdimRestore(bpy.types.Operator):
                 
                 for l in f.loops:
                     luv = l[uv_layer]
-                    print (l[udim_original_x])
-                    print (l[udim_original_y])
-                    luv.uv = (luv.uv[0]-floor(centroid[0])+floor(l[udim_original_x]), luv.uv[1]-floor(centroid[1])+floor(l[udim_original_y]))
+                    try:
+                        luv.uv = (luv.uv[0]-floor(centroid[0])+floor(l[udim_original_x]), luv.uv[1]-floor(centroid[1])+floor(l[udim_original_y]))
+                    except:
+                        print('ignoring new face')
 
             bmesh.update_edit_mesh(me, False, False)
 
