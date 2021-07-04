@@ -192,7 +192,9 @@ def register():
     bpy.utils.register_class(UdimSelectTile)
 #    bpy.types.IMAGE_MT_uvs.append(menu_func)
     bpy.types.IMAGE_MT_uvs_context_menu.append(menu_func)
-    bpy.types.IMAGE_MT_uvs_unwrap.append(menu_func)
+    
+    if hasattr(bpy.types,"IMAGE_MT_uvs_unwrap"):
+        bpy.types.IMAGE_MT_uvs_unwrap.append(menu_func)
     bpy.types.IMAGE_MT_select.append(select_menu_func)
     
 def unregister():
@@ -203,7 +205,8 @@ def unregister():
     bpy.utils.unregister_class(UdimSelectTile)
 #    bpy.types.IMAGE_MT_uvs.remove(menu_func)
     bpy.types.IMAGE_MT_uvs_context_menu.remove(menu_func)
-    bpy.types.IMAGE_MT_uvs_unwrap.remove(menu_func)
+    if hasattr(bpy.types,"IMAGE_MT_uvs_unwrap"):
+        bpy.types.IMAGE_MT_uvs_unwrap.remove(menu_func)
     bpy.types.IMAGE_MT_select.remove(select_menu_func)
 
 if __name__ == "__main__":
