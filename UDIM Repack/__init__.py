@@ -1,7 +1,7 @@
 bl_info = {
     "name": "UDIM Repack Toolkit",
     "author": "Paint-a-Farm",
-    "version": (1, 2),
+    "version": (1, 3),
     "blender": (2, 80, 0),
     "location": "UV > Unwrap > UDIM Repack",
     "description": "Tools for unpacking/repacking/selecting UDIM UVs",
@@ -45,7 +45,7 @@ class UdimRestore(bpy.types.Operator):
                     except:
                         print('ignoring new face')
 
-            bmesh.update_edit_mesh(me, False, False)
+            bmesh.update_edit_mesh(me, loop_triangles=False, destructive=False)
 
         return {'FINISHED'}
 
@@ -77,7 +77,7 @@ class UdimHome(bpy.types.Operator):
                     luv = l[uv_layer]
                     l[uv_layer2].uv = (luv.uv[0]-floor(centroid[0]), luv.uv[1]-floor(centroid[1]))
 
-            bmesh.update_edit_mesh(me, False, False)
+            bmesh.update_edit_mesh(me, loop_triangles=False, destructive=False)
 
         return {'FINISHED'}
 
@@ -115,7 +115,7 @@ class UdimStore(bpy.types.Operator):
                     
                     print('centroid', centroid)
 
-            bmesh.update_edit_mesh(me, False, False)
+            bmesh.update_edit_mesh(me, loop_triangles=False, destructive=False)
         
         return {'FINISHED'}
 
@@ -161,7 +161,7 @@ class UdimSelectTile(bpy.types.Operator):
                         if any(x[0] == floor(centroid[0]) and x[1] == floor(centroid[1]) for x in centroids):
                             f.select = True
 
-                bmesh.update_edit_mesh(me, False, False)
+                bmesh.update_edit_mesh(me, loop_triangles=False, destructive=False)
         
         return {'FINISHED'}
 
